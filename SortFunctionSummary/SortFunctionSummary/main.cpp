@@ -1,6 +1,11 @@
 #include <ctime>
 #include <iostream>
+#include<time.h>
 
+#include "SelectSort.h"
+#include "BubbleSort.h"
+#include "InsertSort.h"
+#include "ShellSort.h"
 
 #pragma region TimeCalculateFunction
 typedef void (*FuncPoint)(int);
@@ -18,7 +23,12 @@ void TimeCalculate(const char* IDNmae, DateName a, void(*Func)(int) = NULL) {
 }
 #pragma endregion
 
+const int arrayLength = 10000;
+
 void main() {
+	srand((unsigned)time(NULL));
+	clock_t startTime, endTime;
+
 #if 0
 	FuncName TestName = "TestName";
 	TimeCalculate(TestName, 0);
@@ -35,5 +45,38 @@ void main() {
 	TimeCalculate(TestName, 0, FuncP);
 #endif // Sample Functions
 
+#pragma region Generate Number Array
+	int* tempData = new int[arrayLength];
+	for (int i = 0; i < arrayLength; i++){
+		tempData[i] = rand() % arrayLength;
+	#if 1
+		for (int j = 0; j < i; j++)
+		{
+			if (tempData[i] == tempData[j])i--;
+		}
+	#endif // if have same number
+	}
+#pragma endregion
+
+
+#if 0
+	SelectSort* selectSort = new SelectSort(arrayLength,tempData);
+	startTime = clock();
+	selectSort->Sort();
+	endTime = clock();
+	std::cout << "Time Duration :" << ((double)endTime - (double)startTime) / CLOCKS_PER_SEC << std::endl;
+	selectSort->PrintDifference(selectSort->GetCount(), selectSort->GetData());
+	delete selectSort;
+#endif // SelectSort function
+
+#if 0
+	BubbleSort* bubbleSort = new BubbleSort(arrayLength, tempData);
+	startTime = clock();
+	bubbleSort->Sort();
+	endTime = clock();
+	std::cout << "Time Duration :" << ((double)endTime - (double)startTime) / CLOCKS_PER_SEC << std::endl;
+	bubbleSort->IsOrdered(bubbleSort->GetCount(), bubbleSort->GetData());
+	delete bubbleSort;
+#endif // BubbleSort function
 
 }

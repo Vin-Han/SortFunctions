@@ -4,7 +4,8 @@
 class BasicTools
 {
 public:
-	void Print(int* data, int count);
-	void PrintDifference(int* data, int count);
+	void Print(int count, int* data);
+	void PrintDifference(int count, int* data);
+	void IsOrdered(int count, int* data);
 };
 
