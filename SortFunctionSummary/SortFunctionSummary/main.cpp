@@ -1,6 +1,8 @@
 #include <ctime>
 #include <iostream>
 
+
+#pragma region TimeCalculateFunction
 typedef void (*FuncPoint)(int);
 typedef const char* FuncName;
 template<typename DateName>
@@ -14,10 +16,13 @@ void TimeCalculate(const char* IDNmae, DateName a, void(*Func)(int) = NULL) {
 	}
 	catch (const char* msg) { std::cout << msg << " is wrong" << std::endl; }
 }
+#pragma endregion
 
 void main() {
+#if 0
 	FuncName TestName = "TestName";
 	TimeCalculate(TestName, 0);
+
 	TimeCalculate(TestName, 0, NULL);
 
 	auto TestFunc = [](int a)->void { for (int i = 0; i < 1000000; i++)a++; };
@@ -28,4 +33,7 @@ void main() {
 
 	FuncP = TestFunc;
 	TimeCalculate(TestName, 0, FuncP);
+#endif // Sample Functions
+
+
 }
